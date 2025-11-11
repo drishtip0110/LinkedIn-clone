@@ -1,0 +1,128 @@
+.right-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.news-card,
+.puzzles-card {
+  padding: 12px 0;
+}
+
+.news-list,
+.puzzles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.news-item {
+  padding: 4px 0;
+  cursor: pointer;
+}
+
+.news-item:hover .news-title {
+  color: #0a66c2;
+  text-decoration: underline;
+}
+
+.news-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.news-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000e6;
+  line-height: 1.4;
+}
+
+.news-stats {
+  font-size: 12px;
+  color: #00000099;
+}
+
+.info-icon {
+  color: #666666;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.puzzle-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.puzzle-item:hover .puzzle-name {
+  color: #0a66c2;
+}
+
+.puzzle-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000e6;
+}
+
+.puzzle-stats {
+  font-size: 12px;
+  color: #00000099;
+}
+
+.show-more-btn {
+  background: none;
+  border: none;
+  color: #666666;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 4px;
+  margin-top: 8px;
+  border-radius: 4px;
+  width: 100%;
+  text-align: left;
+}
+
+.show-more-btn:hover {
+  background-color: #f3f2ef;
+}
+
+.footer-links {
+  padding: 16px 12px;
+}
+
+.links-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-bottom: 8px;
+}
+
+.links-row a {
+  font-size: 12px;
+  color: #666666;
+  text-decoration: none;
+}
+
+.links-row a:hover {
+  color: #0a66c2;
+  text-decoration: underline;
+}
+
+.copyright {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 12px;
+  color: #666666;
+}
+
+.footer-logo {
+  width: 16px;
+  height: 16px;
+}
