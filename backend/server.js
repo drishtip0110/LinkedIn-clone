@@ -12,6 +12,7 @@ app.use(cors({
     'http://localhost:3000',
     'http://localhost:5173',
     'https://linkedin-page.onrender.com',
+    'https://linkedin-clone-1-op95.onrender.com',
     'https://linked-65zsivqmt-nitin04kumars-projects.vercel.app',
     'https://linked-in-es3p-1ts0at5ai-nitin04kumars-projects.vercel.app',
     'https://linked-in-d55v-764jb3fw9-nitin04kumars-projects.vercel.app',
