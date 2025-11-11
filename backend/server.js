@@ -14,7 +14,9 @@ app.use(cors({
     'https://linkedin-page.onrender.com',
     'https://linked-65zsivqmt-nitin04kumars-projects.vercel.app',
     'https://linked-in-es3p-1ts0at5ai-nitin04kumars-projects.vercel.app',
-    'https://linked-in-d55v-764jb3fw9-nitin04kumars-projects.vercel.app'
+    'https://linked-in-d55v-764jb3fw9-nitin04kumars-projects.vercel.app',
+'https://linkedin-clone-1-op95.onrender.com',
+
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
