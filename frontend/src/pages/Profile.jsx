@@ -25,6 +25,7 @@ const Profile = () => {
   useEffect(() => {
     if (user) {
       fetchUserPosts();
+      console.log("Fetching posts for user:", user);
     }
   }, [user]);
 
@@ -145,7 +146,7 @@ const Profile = () => {
                     <img
                       src={
                         user?.profilePicture
-                          ? `${API_BASE_URL}/uploads/${user.profilePicture}`
+                          ? `${user.profilePicture}`
                           : "/default-avatar.png"
                       }
                       alt={user?.name}
@@ -343,7 +344,7 @@ const Profile = () => {
                         <img
                           src={
                             user?.profilePicture
-                              ? `${API_BASE_URL}/uploads/${user.profilePicture}`
+                              ? `${user.profilePicture}`
                               : "/default-avatar.png"
                           }
                           alt={user?.name}
@@ -359,7 +360,7 @@ const Profile = () => {
                       <p className="activity-content">{post.content}</p>
                       {post.image && (
                         <div className="activity-image">
-                          <img src={`${API_BASE_URL}/uploads/${post.image}`} alt="Post" />
+                          <img src={`${post.image}`} alt="Post" />
                         </div>
                       )}
                       <div className="activity-stats">

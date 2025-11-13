@@ -96,7 +96,7 @@ const CreatePost = ({ onPostCreated }) => {
         <img
           src={
             user?.profilePicture
-              ? `${API_BASE_URL}/uploads/${user.profilePicture}`
+              ? `${user.profilePicture}`
               : "/default-avatar.png"
           }
           alt={user?.name}

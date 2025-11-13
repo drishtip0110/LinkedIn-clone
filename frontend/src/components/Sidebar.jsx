@@ -45,7 +45,7 @@ const Sidebar = () => {
         <div className="user-background"></div>
         <div className="user-info">
           <img
-            src={user?.profilePicture ? `${API_BASE_URL}/uploads/${user.profilePicture}` : "/default-avatar.png"}
+            src={user?.profilePicture ? `${user.profilePicture}` : "/default-avatar.png"}
             alt={user?.name}
             className="user-avatar"
           />
@@ -104,7 +104,7 @@ const Sidebar = () => {
             {suggestions.slice(0, 3).map((person) => (
               <div key={person._id} className="suggestion-item">
                 <img
-                  src={person.profilePicture ? `${API_BASE_URL}/uploads/${person.profilePicture}` : "/default-avatar.png"}
+                  src={person.profilePicture ? `${person.profilePicture}` : "/default-avatar.png"}
                   alt={person.name}
                   className="suggestion-avatar"
                 />
