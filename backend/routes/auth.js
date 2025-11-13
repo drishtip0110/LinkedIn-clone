@@ -18,7 +18,7 @@ router.post(
     try {
       const { name, email, password } = req.body;
 
-      // Validation
+      // Validate fields
       if (!name || !email || !password) {
         return res.status(400).json({
           success: false,
@@ -33,7 +33,7 @@ router.post(
         });
       }
 
-      // Check if user already exists
+      //  Check if user exists
       const existingUser = await User.findOne({ email });
       if (existingUser) {
         return res.status(400).json({
@@ -42,34 +42,29 @@ router.post(
         });
       }
 
-      let profilePictureUrl = "";
+      // Prepare user data
+      const newUserData = {
+        name: name.trim(),
+        email: email.trim(),
+        password,
+      };
 
-      // Upload image to Cloudinary (if provided)
+      // If profile picture uploaded — Cloudinary URL will be available in req.file.path
       if (req.file) {
-        const uploadResult = await cloudinary.uploader.upload(req.file.path, {
-          folder: "linkedin_clone/profile_pictures",
-        });
-        profilePictureUrl = uploadResult.secure_url;
-
-        // Remove file from local storage after upload
-        fs.unlinkSync(req.file.path);
+        newUserData.profilePicture = req.file.path; // Cloudinary URL
+        newUserData.profilePicturePublicId = req.file.filename; // Optional (for later deletion)
       }
 
-      // Create user with Cloudinary image URL
-      const user = new User({
-        name,
-        email,
-        password,
-        profilePicture: profilePictureUrl,
-      });
-
+      // 🔹 Create user
+      const user = new User(newUserData);
       await user.save();
 
-      // Generate JWT token
+      // 🔹 Generate JWT token
       const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
         expiresIn: "7d",
       });
 
+      // 🔹 Send response
       res.status(201).json({
         success: true,
         message: "User registered successfully",
@@ -78,7 +73,7 @@ router.post(
           id: user._id,
           name: user.name,
           email: user.email,
-          profilePicture: user.profilePicture,
+          profilePicture: user.profilePicture, // Cloudinary URL
           bio: user.bio,
         },
       });
@@ -87,12 +82,11 @@ router.post(
       res.status(500).json({
         success: false,
         message: "Server error during registration",
-        error:
-          process.env.NODE_ENV === "development" ? error.message : undefined,
       });
     }
   }
 );
+
 
 // @route   POST /api/auth/login
 // @desc    Login user
