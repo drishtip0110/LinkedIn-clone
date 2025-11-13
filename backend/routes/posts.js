@@ -24,12 +24,12 @@ router.post(
         });
       }
 
-      // 🧩 Get image URL from Cloudinary upload result
+      // Get image URL from Cloudinary upload result
       const imageUrl = req.file ? req.file.path : "";
 
       const post = new Post({
         content: content.trim(),
-        image: imageUrl, // ✅ Store Cloudinary URL, not filename
+        image: imageUrl, // Store Cloudinary URL, not filename
         author: req.userId,
       });
 
@@ -42,9 +42,9 @@ router.post(
         post,
       });
 
-      console.log("✅ Post created:", post);
+      console.log("Post created:", post);
     } catch (error) {
-      console.error("❌ Create post error:", error);
+      console.error("Create post error:", error);
       res.status(500).json({
         success: false,
         message: "Server error while creating post",
