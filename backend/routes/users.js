@@ -50,13 +50,13 @@ router.put(
         location: location?.trim(),
       };
 
-      // 🧩 If new image uploaded — store the Cloudinary URL
+      // If new image uploaded — store the Cloudinary URL
       if (req.file) {
-        updateData.profilePicture = req.file.path; // ✅ Cloudinary URL
+        updateData.profilePicture = req.file.path; // Cloudinary URL
         updateData.profilePicturePublicId = req.file.filename; // optional (useful for deletion)
       }
 
-      // 🧠 Parse JSON fields if provided
+      // Parse JSON fields if provided
       if (experience) {
         updateData.experience = JSON.parse(experience);
       }
@@ -81,7 +81,7 @@ router.put(
           id: updatedUser._id,
           name: updatedUser.name,
           email: updatedUser.email,
-          profilePicture: updatedUser.profilePicture, // ✅ Cloudinary URL
+          profilePicture: updatedUser.profilePicture, // Cloudinary URL
           bio: updatedUser.bio,
           headline: updatedUser.headline,
           location: updatedUser.location,
