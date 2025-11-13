@@ -121,7 +121,7 @@ const Post = ({ post, onUpdate, onDelete }) => {
           <img
             src={
               post.author.profilePicture
-                ? `${API_BASE_URL}/uploads/${post.author.profilePicture}`
+                ? `${post.author.profilePicture}`
                 : "/default-avatar.png"
             }
             alt={post.author.name}
@@ -189,7 +189,7 @@ const Post = ({ post, onUpdate, onDelete }) => {
               <img
                 src={
                   post.originalPost.author?.profilePicture
-                    ? `${API_BASE_URL}/uploads/${post.originalPost.author.profilePicture}`
+                    ? `${post.originalPost.author.profilePicture}`
                     : "/default-avatar.png"
                 }
                 alt={post.originalPost.author?.name}
@@ -206,7 +206,7 @@ const Post = ({ post, onUpdate, onDelete }) => {
             {post.originalPost.image && (
               <div className="original-post-image">
                 <img
-                  src={`${API_BASE_URL}/uploads/${post.originalPost.image}`}
+                  src={`${post.originalPost.image}`}
                   alt="Original post"
                 />
               </div>
@@ -216,7 +216,7 @@ const Post = ({ post, onUpdate, onDelete }) => {
 
         {post.image && !post.isRepost && (
           <div className="post-image">
-            <img src={`${API_BASE_URL}/uploads/${post.image}`} alt="Post" />
+            <img src={`${post.image}`} alt="Post" />
           </div>
         )}
       </div>
@@ -252,7 +252,7 @@ const Post = ({ post, onUpdate, onDelete }) => {
             <img
               src={
                 user?.profilePicture
-                  ? `${API_BASE_URL}/uploads/${user.profilePicture}`
+                  ? `${user.profilePicture}`
                   : "/default-avatar.png"
               }
               alt="Your avatar"
@@ -278,7 +278,7 @@ const Post = ({ post, onUpdate, onDelete }) => {
                 <img
                   src={
                     comment.user.profilePicture
-                      ? `${API_BASE_URL}/uploads/${comment.user.profilePicture}`
+                      ? `${comment.user.profilePicture}`
                       : "/default-avatar.png"
                   }
                   alt={comment.user.name}
@@ -328,7 +328,7 @@ const Post = ({ post, onUpdate, onDelete }) => {
                   <img
                     src={
                       post.author?.profilePicture
-                        ? `${API_BASE_URL}/uploads/${post.author.profilePicture}`
+                        ? `${post.author.profilePicture}`
                         : "/default-avatar.png"
                     }
                     alt={post.author?.name}

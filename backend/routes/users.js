@@ -26,65 +26,82 @@ router.get("/profile", auth, async (req, res) => {
 // @route   PUT /api/users/profile
 // @desc    Update user profile
 // @access  Private
-router.put("/profile", auth, upload.single("profilePicture"), handleUploadError, async (req, res) => {
-  try {
-    const { name, bio, headline, location, experience, education, skills } = req.body;
-    
-    const updateData = {
-      name: name?.trim(),
-      bio: bio?.trim(),
-      headline: headline?.trim(),
-      location: location?.trim()
-    };
-    
-    if (req.file) {
-      updateData.profilePicture = req.file.filename;
-    }
+router.put(
+  "/profile",
+  auth,
+  upload.single("profilePicture"),
+  handleUploadError,
+  async (req, res) => {
+    try {
+      const {
+        name,
+        bio,
+        headline,
+        location,
+        experience,
+        education,
+        skills,
+      } = req.body;
 
-    if (experience) {
-      updateData.experience = JSON.parse(experience);
-    }
-    
-    if (education) {
-      updateData.education = JSON.parse(education);
-    }
-    
-    if (skills) {
-      updateData.skills = JSON.parse(skills);
-    }
+      const updateData = {
+        name: name?.trim(),
+        bio: bio?.trim(),
+        headline: headline?.trim(),
+        location: location?.trim(),
+      };
 
-    const updatedUser = await User.findByIdAndUpdate(
-      req.userId,
-      updateData,
-      { new: true, runValidators: true }
-    ).select("-password");
+      // 🧩 If new image uploaded — store the Cloudinary URL
+      if (req.file) {
+        updateData.profilePicture = req.file.path; // ✅ Cloudinary URL
+        updateData.profilePicturePublicId = req.file.filename; // optional (useful for deletion)
+      }
 
-    res.json({
-      success: true,
-      message: "Profile updated successfully",
-      user: {
-        id: updatedUser._id,
-        name: updatedUser.name,
-        email: updatedUser.email,
-        profilePicture: updatedUser.profilePicture,
-        bio: updatedUser.bio,
-        headline: updatedUser.headline,
-        location: updatedUser.location,
-        experience: updatedUser.experience,
-        education: updatedUser.education,
-        skills: updatedUser.skills,
-        profileViews: updatedUser.profileViews,
-        postImpressions: updatedUser.postImpressions
-      },
-    });
-  } catch (error) {
-    console.error("Update profile error:", error);
-    res.status(500).json({
-      success: false,
-      message: "Server error while updating profile",
-    });
+      // 🧠 Parse JSON fields if provided
+      if (experience) {
+        updateData.experience = JSON.parse(experience);
+      }
+
+      if (education) {
+        updateData.education = JSON.parse(education);
+      }
+
+      if (skills) {
+        updateData.skills = JSON.parse(skills);
+      }
+
+      const updatedUser = await User.findByIdAndUpdate(req.userId, updateData, {
+        new: true,
+        runValidators: true,
+      }).select("-password");
+
+      res.json({
+        success: true,
+        message: "Profile updated successfully",
+        user: {
+          id: updatedUser._id,
+          name: updatedUser.name,
+          email: updatedUser.email,
+          profilePicture: updatedUser.profilePicture, // ✅ Cloudinary URL
+          bio: updatedUser.bio,
+          headline: updatedUser.headline,
+          location: updatedUser.location,
+          experience: updatedUser.experience,
+          education: updatedUser.education,
+          skills: updatedUser.skills,
+          profileViews: updatedUser.profileViews,
+          postImpressions: updatedUser.postImpressions,
+        },
+      });
+    } catch (error) {
+      console.error("Update profile error:", error);
+      res.status(500).json({
+        success: false,
+        message: "Server error while updating profile",
+      });
+    }
   }
-});
+);
+
 
 // @route   POST /api/users/view/:userId
 // @desc    Increment profile view count
